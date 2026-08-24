@@ -19,3 +19,5 @@
    - porch-canopy-main.png, porch-canopy-detail.png
 7. Пандус и металлические ограждения
    - ramp-railings-main.png, ramp-railings-detail.png
+8. Ворота и калитка
+   - gates-main.png, gates-detail.png
