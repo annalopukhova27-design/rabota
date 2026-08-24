@@ -119,6 +119,10 @@
     lightboxImg.alt = galleryTitle + " — фото " + (galleryIndex + 1);
     lightboxImg.style.objectFit = "contain";
     lightboxImg.style.objectPosition = "center";
+    lightboxImg.style.width = "auto";
+    lightboxImg.style.height = "auto";
+    lightboxImg.style.maxWidth = "90vw";
+    lightboxImg.style.maxHeight = "90vh";
 
     if (lightboxCounter) {
       lightboxCounter.textContent = galleryIndex + 1 + " / " + galleryImages.length;

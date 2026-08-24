@@ -560,7 +560,7 @@ body.menu-open {
   background: var(--color-surface);
   box-shadow: var(--shadow-soft);
   overflow: hidden;
-  cursor: pointer;
+  cursor: zoom-in;
   text-align: left;
   font: inherit;
   color: inherit;
@@ -883,8 +883,7 @@ body.menu-open {
   font-size: 1rem;
 }
 
-.request__community,
-.contacts__community {
+.request__community {
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
@@ -897,50 +896,48 @@ body.menu-open {
   transition: border-color var(--transition), background var(--transition);
 }
 
-.request__community:hover,
-.contacts__community:hover {
+.request__community:hover {
   border-color: #b7c8da;
   background: #fff;
 }
 
-.request__community-title,
-.contacts__community-title {
+.request__community-title {
   font-weight: 600;
   color: var(--color-graphite);
   font-size: 0.975rem;
 }
 
-.request__community-text,
-.contacts__community-text {
+.request__community-text {
   font-size: 0.875rem;
   color: var(--color-text-muted);
 }
 
-.contacts__community {
-  margin-top: 1.25rem;
-  max-width: 26rem;
-}
-
-/* Contacts — светло-серая секция */
+/* Contacts — компактный справочный блок */
 .contacts {
   background: var(--color-bg-alt);
   border-top: 1px solid var(--color-line);
+  padding-block: 2rem;
 }
 
-.contacts__grid {
+.contacts__inner {
   display: grid;
-  gap: 2rem;
+  gap: 1.25rem;
+}
+
+.contacts__title {
+  margin-bottom: 0.5rem;
+  font-size: clamp(1.4rem, 4vw, 1.75rem);
 }
 
 .contacts__region {
-  margin: 0 0 1.5rem;
+  margin: 0 0 0.85rem;
   color: var(--color-text-muted);
-  font-size: 1.05rem;
+  font-size: 1rem;
 }
 
 .contacts__label {
-  margin: 0 0 0.35rem;
-  font-size: 0.8rem;
+  margin: 0 0 0.25rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: var(--color-text-muted);
@@ -949,9 +946,9 @@ body.menu-open {
 
 .contacts__phone {
   display: inline-block;
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.25rem;
   font-family: var(--font-display);
-  font-size: clamp(1.5rem, 5vw, 2rem);
+  font-size: clamp(1.25rem, 4vw, 1.6rem);
   font-weight: 700;
   letter-spacing: -0.02em;
   color: var(--color-graphite);
@@ -963,29 +960,18 @@ body.menu-open {
 }
 
 .contacts__phone-note {
-  margin: 0 0 1.35rem;
+  margin: 0;
   color: var(--color-text-muted);
-  font-size: 0.925rem;
-}
-
-.contacts__actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-}
-
-.contacts__aside {
-  padding: 1.5rem;
-  border: 1px solid var(--color-line);
-  border-radius: var(--radius-md);
-  background: var(--color-surface);
-  box-shadow: var(--shadow-soft);
-  align-self: start;
+  font-size: 0.9rem;
 }
 
 .contacts__note {
   margin: 0;
+  padding-top: 0.15rem;
   color: var(--color-text-muted);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  max-width: 36rem;
 }
 
 /* Footer — тёмно-графитовый */
@@ -1023,7 +1009,7 @@ body.menu-open {
   color: #fff;
 }
 
-/* Lightbox / галерея проекта */
+/* Lightbox / галерея проекта — полный кадр без обрезки */
 .lightbox {
   position: fixed;
   inset: 0;
@@ -1040,19 +1026,20 @@ body.menu-open {
 .lightbox__backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(20, 28, 38, 0.82);
+  background: rgba(14, 20, 28, 0.88);
   cursor: pointer;
 }
 
 .lightbox__panel {
   position: relative;
   z-index: 1;
-  width: min(100%, 58rem);
+  width: min(100%, 92vw);
+  max-width: 72rem;
   max-height: calc(100vh - 1.5rem);
   max-height: calc(100dvh - 1.5rem);
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow: auto;
   background: var(--color-surface);
   border-radius: var(--radius-md);
   border: 1px solid var(--color-line);
@@ -1113,10 +1100,11 @@ body.menu-open {
 .lightbox__stage {
   position: relative;
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
-  gap: 0.25rem;
-  padding: 0.75rem 0.35rem 1rem;
+  justify-items: center;
+  gap: 0.35rem;
+  padding: 0.85rem 0.5rem 1.1rem;
   min-height: 0;
   flex: 1;
 }
@@ -1124,25 +1112,32 @@ body.menu-open {
 .lightbox__figure {
   margin: 0;
   min-width: 0;
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .lightbox__media {
-  width: 100%;
-  height: min(62vh, 32rem);
-  height: min(62dvh, 32rem);
-  display: grid;
-  place-items: center;
-  background: #eef1f4;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #121820;
   border-radius: var(--radius);
-  overflow: hidden;
+  overflow: visible;
+  padding: 0.35rem;
 }
 
 .lightbox__img {
-  width: 100%;
-  height: 100%;
-  max-width: 100%;
-  object-fit: contain;
   display: block;
+  width: auto;
+  height: auto;
+  max-width: min(90vw, 100%);
+  max-height: min(78vh, 78dvh);
+  object-fit: contain;
+  object-position: center;
 }
 
 .lightbox__nav {
@@ -1260,11 +1255,6 @@ body.menu-open {
     align-items: center;
     padding-block: calc(var(--header-h) + 3rem) 4rem;
   }
-
-  .lightbox__media {
-    height: min(68vh, 36rem);
-    height: min(68dvh, 36rem);
-  }
 }
 
 /* Desktop */
@@ -1349,10 +1339,21 @@ body.menu-open {
     padding: 1.75rem;
   }
 
-  .contacts__grid {
-    grid-template-columns: 1.2fr 0.8fr;
-    gap: 3rem;
-    align-items: start;
+  .contacts {
+    padding-block: 2.25rem;
+  }
+
+  .contacts__inner {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: 2rem 3rem;
+    align-items: end;
+  }
+
+  .contacts__note {
+    padding-bottom: 0.15rem;
+    border-left: 1px solid var(--color-line);
+    padding-left: 1.5rem;
+    max-width: none;
   }
 
   .footer__inner {
@@ -1363,6 +1364,10 @@ body.menu-open {
 
   .section {
     padding: var(--space-2xl) 0;
+  }
+
+  .contacts.section {
+    padding-block: 2.25rem;
   }
 
   .hero__content {
@@ -1382,7 +1387,7 @@ body.menu-open {
 
   .lightbox {
     padding: 0.5rem;
-    align-items: stretch;
+    align-items: center;
   }
 
   .lightbox__panel {
@@ -1392,7 +1397,7 @@ body.menu-open {
   }
 
   .lightbox__toolbar {
-    padding: 0.9rem 3rem 0.65rem 0.9rem;
+    padding: 0.85rem 2.85rem 0.6rem 0.85rem;
   }
 
   .lightbox__stage {
@@ -1402,15 +1407,22 @@ body.menu-open {
       "media media"
       "prev next";
     gap: 0.5rem;
-    padding: 0.5rem 0.65rem 0.85rem;
+    padding: 0.5rem 0.55rem 0.85rem;
   }
 
   .lightbox__figure {
     grid-area: media;
+    width: 100%;
   }
 
   .lightbox__media {
-    height: min(52dvh, 24rem);
+    width: 100%;
+    padding: 0.2rem;
+  }
+
+  .lightbox__img {
+    max-width: 92vw;
+    max-height: min(70vh, 70dvh);
   }
 
   .lightbox__nav {
