@@ -547,11 +547,13 @@ body.menu-open {
 .portfolio {
   display: grid;
   gap: 1.25rem;
+  align-items: stretch;
 }
 
 .portfolio-item {
   display: flex;
   flex-direction: column;
+  height: 100%;
   padding: 0;
   border: 1px solid var(--color-line);
   border-radius: var(--radius-md);
@@ -586,6 +588,7 @@ body.menu-open {
   background: var(--color-bg-alt);
   position: relative;
   overflow: hidden;
+  flex-shrink: 0;
 }
 
 .portfolio-item__img {
@@ -594,6 +597,28 @@ body.menu-open {
   object-fit: cover;
   object-position: center;
   display: block;
+}
+
+/* Позиционирование обложек/превью кейса ангара — композиция чуть ниже */
+.portfolio-item__img--angar-main,
+.portfolio-item__img[src*="angar-main"] {
+  object-position: center 58%;
+}
+
+.portfolio-item__img[src*="angar-montazh"] {
+  object-position: center 60%;
+}
+
+.portfolio-item__img[src*="angar-process"] {
+  object-position: center 55%;
+}
+
+.portfolio-item__img[src*="angar-fermy"] {
+  object-position: center 62%;
+}
+
+.portfolio-item__img[src*="angar-result"] {
+  object-position: center 65%;
 }
 
 .portfolio-item__body {
@@ -1213,7 +1238,7 @@ body.menu-open {
   }
 
   .portfolio {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .process__list {
@@ -1283,8 +1308,8 @@ body.menu-open {
   }
 
   .portfolio {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.35rem;
   }
 
   .about__grid {
