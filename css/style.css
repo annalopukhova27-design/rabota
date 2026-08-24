@@ -560,7 +560,7 @@ body.menu-open {
   background: var(--color-surface);
   box-shadow: var(--shadow-soft);
   overflow: hidden;
-  cursor: zoom-in;
+  cursor: default;
   text-align: left;
   font: inherit;
   color: inherit;
@@ -589,6 +589,7 @@ body.menu-open {
   position: relative;
   overflow: hidden;
   flex-shrink: 0;
+  cursor: zoom-in;
 }
 
 .portfolio-item__img {
