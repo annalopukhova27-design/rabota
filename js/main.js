@@ -1,6 +1,5 @@
 /**
  * Сварка • Монтаж — основной скрипт
- * Без backend: форма показывает локальное сообщение об успехе.
  */
 
 (function () {
@@ -9,15 +8,15 @@
   const header = document.getElementById("header");
   const burger = document.getElementById("burger");
   const nav = document.getElementById("nav");
-  const form = document.getElementById("request-form");
-  const formSuccess = document.getElementById("form-success");
   const lightbox = document.getElementById("lightbox");
   const lightboxImg = document.getElementById("lightbox-img");
   const lightboxMedia = document.getElementById("lightbox-media");
   const lightboxCaption = document.getElementById("lightbox-caption");
+  const lightboxCounter = document.getElementById("lightbox-counter");
+  const lightboxPrev = document.getElementById("lightbox-prev");
+  const lightboxNext = document.getElementById("lightbox-next");
   const portfolio = document.getElementById("portfolio");
   const filterButtons = document.querySelectorAll(".filter-btn");
-  const masterPhoto = document.getElementById("master-photo");
 
   /* ---------- Header scroll state ---------- */
   function updateHeader() {
@@ -78,67 +77,6 @@
     });
   }
 
-  /* ---------- Image helpers ---------- */
-  function tryLoadImage(url) {
-    return new Promise(function (resolve) {
-      if (!url) {
-        resolve(false);
-        return;
-      }
-      const img = new Image();
-      img.onload = function () {
-        resolve(true);
-      };
-      img.onerror = function () {
-        resolve(false);
-      };
-      img.src = url;
-    });
-  }
-
-  /**
-   * Подставляет реальные фото в портфолио, если файлы уже лежат в images/portfolio/.
-   * data-src на кнопке — путь к будущему изображению.
-   */
-  async function hydratePortfolioImages() {
-    if (!portfolio) return;
-    const items = portfolio.querySelectorAll(".portfolio-item");
-
-    for (const item of items) {
-      const src = item.getAttribute("data-src");
-      const media = item.querySelector(".portfolio-item__media");
-      const img = item.querySelector(".portfolio-item__img");
-      if (!src || !media || !img) continue;
-
-      const exists = await tryLoadImage(src);
-      if (!exists) continue;
-
-      img.src = src;
-      img.hidden = false;
-      media.classList.add("has-image");
-      media.classList.remove("placeholder");
-    }
-  }
-
-  /**
-   * Фото мастера: images/master/photo.jpg
-   */
-  async function hydrateMasterPhoto() {
-    if (!masterPhoto) return;
-    const src = "images/master/photo.jpg";
-    const wrap = masterPhoto.closest(".about__photo");
-    const exists = await tryLoadImage(src);
-    if (!exists || !wrap) return;
-
-    masterPhoto.src = src;
-    masterPhoto.hidden = false;
-    wrap.classList.add("has-image");
-    wrap.classList.remove("placeholder");
-  }
-
-  hydratePortfolioImages();
-  hydrateMasterPhoto();
-
   /* ---------- Portfolio filters ---------- */
   filterButtons.forEach(function (button) {
     button.addEventListener("click", function () {
@@ -157,29 +95,59 @@
     });
   });
 
-  /* ---------- Lightbox ---------- */
+  /* ---------- Lightbox gallery ---------- */
   let lastFocused = null;
+  let galleryImages = [];
+  let galleryIndex = 0;
+  let galleryTitle = "";
 
-  function openLightbox(title, src, hasImage) {
-    if (!lightbox || !lightboxCaption || !lightboxMedia || !lightboxImg) return;
+  function parseImages(attr) {
+    if (!attr) return [];
+    return attr
+      .split("|")
+      .map(function (item) {
+        return item.trim();
+      })
+      .filter(Boolean);
+  }
+
+  function updateLightboxSlide() {
+    if (!lightboxImg || !galleryImages.length) return;
+
+    const src = galleryImages[galleryIndex];
+    lightboxImg.src = src;
+    lightboxImg.alt = galleryTitle + " — фото " + (galleryIndex + 1);
+
+    if (lightboxCounter) {
+      lightboxCounter.textContent = galleryIndex + 1 + " / " + galleryImages.length;
+    }
+
+    if (lightboxPrev) {
+      lightboxPrev.disabled = galleryImages.length <= 1;
+    }
+    if (lightboxNext) {
+      lightboxNext.disabled = galleryImages.length <= 1;
+    }
+  }
+
+  function openGallery(title, images) {
+    if (!lightbox || !images.length) return;
 
     lastFocused = document.activeElement;
-    lightboxCaption.textContent = title;
-    lightboxMedia.setAttribute("data-placeholder", title);
+    galleryTitle = title || "";
+    galleryImages = images.slice();
+    galleryIndex = 0;
 
-    if (hasImage && src) {
-      lightboxImg.src = src;
-      lightboxImg.alt = title;
-      lightboxImg.hidden = false;
+    if (lightboxCaption) {
+      lightboxCaption.textContent = galleryTitle;
+    }
+
+    if (lightboxMedia) {
       lightboxMedia.classList.add("has-image");
       lightboxMedia.classList.remove("placeholder");
-    } else {
-      lightboxImg.removeAttribute("src");
-      lightboxImg.alt = "";
-      lightboxImg.hidden = true;
-      lightboxMedia.classList.add("placeholder");
-      lightboxMedia.classList.remove("has-image");
     }
+
+    updateLightboxSlide();
 
     lightbox.hidden = false;
     lightbox.setAttribute("aria-hidden", "false");
@@ -196,9 +164,17 @@
     lightbox.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
 
+    galleryImages = [];
+    galleryIndex = 0;
+    galleryTitle = "";
+
     if (lightboxImg) {
       lightboxImg.removeAttribute("src");
-      lightboxImg.hidden = true;
+      lightboxImg.alt = "";
+    }
+
+    if (lightboxCounter) {
+      lightboxCounter.textContent = "";
     }
 
     if (lastFocused && typeof lastFocused.focus === "function") {
@@ -206,23 +182,38 @@
     }
   }
 
+  function showPrev() {
+    if (galleryImages.length <= 1) return;
+    galleryIndex = (galleryIndex - 1 + galleryImages.length) % galleryImages.length;
+    updateLightboxSlide();
+  }
+
+  function showNext() {
+    if (galleryImages.length <= 1) return;
+    galleryIndex = (galleryIndex + 1) % galleryImages.length;
+    updateLightboxSlide();
+  }
+
+  function openPortfolioItem(item) {
+    const title = item.getAttribute("data-title") || "";
+    const images = parseImages(item.getAttribute("data-images"));
+    if (!images.length) return;
+    openGallery(title, images);
+  }
+
   if (portfolio) {
-    portfolio.addEventListener("click", async function (event) {
+    portfolio.addEventListener("click", function (event) {
       const item = event.target.closest(".portfolio-item");
-      if (!item) return;
+      if (!item || !portfolio.contains(item)) return;
+      openPortfolioItem(item);
+    });
 
-      const title = item.getAttribute("data-title") || "";
-      const src = item.getAttribute("data-src") || "";
-      const img = item.querySelector(".portfolio-item__img");
-      const alreadyLoaded = img && !img.hidden && img.getAttribute("src");
-
-      if (alreadyLoaded) {
-        openLightbox(title, img.getAttribute("src"), true);
-        return;
-      }
-
-      const exists = await tryLoadImage(src);
-      openLightbox(title, src, exists);
+    portfolio.addEventListener("keydown", function (event) {
+      if (event.key !== "Enter" && event.key !== " ") return;
+      const item = event.target.closest(".portfolio-item");
+      if (!item || event.target !== item) return;
+      event.preventDefault();
+      openPortfolioItem(item);
     });
   }
 
@@ -234,49 +225,37 @@
     });
   }
 
-  document.addEventListener("keydown", function (event) {
-    if (event.key === "Escape") closeLightbox();
-  });
-
-  /* ---------- Request form (no backend) ---------- */
-  function setInvalid(field, invalid) {
-    field.classList.toggle("is-invalid", invalid);
-  }
-
-  if (form) {
-    form.addEventListener("submit", function (event) {
-      event.preventDefault();
-
-      const name = form.querySelector("#name");
-      const phone = form.querySelector("#phone");
-      const task = form.querySelector("#task");
-      const consent = form.querySelector("#consent");
-
-      let valid = true;
-
-      [name, phone, task].forEach(function (field) {
-        const ok = field && field.value.trim().length > 0;
-        setInvalid(field, !ok);
-        if (!ok) valid = false;
-      });
-
-      if (consent && !consent.checked) {
-        valid = false;
-        consent.focus();
-      }
-
-      if (!valid) return;
-
-      // Без отправки на сервер — только локальное подтверждение
-      form.reset();
-      [name, phone, task].forEach(function (field) {
-        setInvalid(field, false);
-      });
-
-      if (formSuccess) {
-        formSuccess.hidden = false;
-        formSuccess.focus();
-      }
+  if (lightboxPrev) {
+    lightboxPrev.addEventListener("click", function (event) {
+      event.stopPropagation();
+      showPrev();
     });
   }
+
+  if (lightboxNext) {
+    lightboxNext.addEventListener("click", function (event) {
+      event.stopPropagation();
+      showNext();
+    });
+  }
+
+  document.addEventListener("keydown", function (event) {
+    if (!lightbox || lightbox.hidden) {
+      if (event.key === "Escape") closeLightbox();
+      return;
+    }
+
+    if (event.key === "Escape") {
+      closeLightbox();
+      return;
+    }
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      showPrev();
+    }
+    if (event.key === "ArrowRight") {
+      event.preventDefault();
+      showNext();
+    }
+  });
 })();

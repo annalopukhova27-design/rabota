@@ -43,7 +43,7 @@
           <li><a class="nav__link" href="#process">Этапы работы</a></li>
           <li><a class="nav__link" href="#contacts">Контакты</a></li>
         </ul>
-        <a class="btn btn--primary btn--sm nav__cta" href="#request">Рассчитать стоимость</a>
+        <a class="btn btn--primary btn--sm nav__cta" href="#contacts">Рассчитать стоимость</a>
       </nav>
 
       <button
@@ -71,7 +71,7 @@
         <p class="hero__subtitle">Металлоконструкции • Отопление • Водоснабжение<br>От частных заказов до крупных объектов</p>
         <p class="hero__text">Изготовление, монтаж и ремонт. Белорецк и выезд по Республике Башкортостан.</p>
         <div class="hero__actions">
-          <a class="btn btn--primary" href="#request">Рассчитать стоимость</a>
+          <a class="btn btn--primary" href="#contacts">Рассчитать стоимость</a>
           <a class="btn btn--ghost" href="#works">Посмотреть работы</a>
         </div>
         <ul class="hero__benefits">
@@ -180,118 +180,57 @@
         </div>
 
         <div class="portfolio" id="portfolio">
-          <!-- Чтобы добавить фото: положите файл в images/portfolio/ и укажите путь в data-src -->
-          <button
+          <article
             class="portfolio-item reveal"
-            type="button"
             data-category="metal"
-            data-src="images/portfolio/arch-structure.jpg"
-            data-title="Арочная металлоконструкция"
-            aria-label="Открыть: Арочная металлоконструкция"
+            data-title="Изготовление и монтаж металлоконструкции"
+            data-images="images/portfolio/angar-main.png|images/portfolio/angar-montazh.png|images/portfolio/angar-process.png|images/portfolio/angar-fermy.png|images/portfolio/angar-result.png"
+            tabindex="0"
+            role="button"
+            aria-label="Открыть проект: Изготовление и монтаж металлоконструкции"
           >
-            <div class="portfolio-item__media placeholder" data-placeholder="Арочная металлоконструкция">
-              <img class="portfolio-item__img" src="" alt="Арочная металлоконструкция" loading="lazy" hidden>
+            <div class="portfolio-item__media">
+              <img
+                class="portfolio-item__img"
+                src="images/portfolio/angar-main.png"
+                alt="Изготовление и монтаж металлоконструкции — общий вид каркаса"
+                loading="lazy"
+                width="1200"
+                height="800"
+              >
             </div>
-            <span class="portfolio-item__caption">Арочная металлоконструкция</span>
-          </button>
+            <div class="portfolio-item__body">
+              <h3 class="portfolio-item__title">Изготовление и монтаж металлоконструкции</h3>
+              <p class="portfolio-item__text">Изготовление и монтаж металлического каркаса здания. Сборка элементов конструкции, сварочные работы и монтаж металлоконструкций на объекте.</p>
+              <span class="btn btn--primary btn--sm portfolio-item__btn">Подробнее</span>
+            </div>
+          </article>
 
-          <button
+          <article
             class="portfolio-item reveal"
-            type="button"
             data-category="metal"
-            data-src="images/portfolio/trusses.jpg"
-            data-title="Изготовление металлических ферм"
-            aria-label="Открыть: Изготовление металлических ферм"
+            data-title="Металлоконструкция для технологического оборудования"
+            data-images="images/portfolio/equipment-frame.png|images/portfolio/equipment-frame-detail.png|images/portfolio/equipment-building.png|images/portfolio/equipment-result.png"
+            tabindex="0"
+            role="button"
+            aria-label="Открыть проект: Металлоконструкция для технологического оборудования"
           >
-            <div class="portfolio-item__media placeholder" data-placeholder="Изготовление металлических ферм">
-              <img class="portfolio-item__img" src="" alt="Изготовление металлических ферм" loading="lazy" hidden>
+            <div class="portfolio-item__media">
+              <img
+                class="portfolio-item__img"
+                src="images/portfolio/equipment-frame.png"
+                alt="Металлоконструкция для технологического оборудования — металлический каркас"
+                loading="lazy"
+                width="1200"
+                height="800"
+              >
             </div>
-            <span class="portfolio-item__caption">Изготовление металлических ферм</span>
-          </button>
-
-          <button
-            class="portfolio-item reveal"
-            type="button"
-            data-category="metal"
-            data-src="images/portfolio/metal-install.jpg"
-            data-title="Монтаж металлоконструкций"
-            aria-label="Открыть: Монтаж металлоконструкций"
-          >
-            <div class="portfolio-item__media placeholder" data-placeholder="Монтаж металлоконструкций">
-              <img class="portfolio-item__img" src="" alt="Монтаж металлоконструкций" loading="lazy" hidden>
+            <div class="portfolio-item__body">
+              <h3 class="portfolio-item__title">Металлоконструкция для технологического оборудования</h3>
+              <p class="portfolio-item__text">Изготовление и монтаж металлического каркаса для размещения и защиты технологического оборудования.</p>
+              <span class="btn btn--primary btn--sm portfolio-item__btn">Подробнее</span>
             </div>
-            <span class="portfolio-item__caption">Монтаж металлоконструкций</span>
-          </button>
-
-          <button
-            class="portfolio-item reveal"
-            type="button"
-            data-category="private"
-            data-src="images/portfolio/gates.jpg"
-            data-title="Ворота с калиткой"
-            aria-label="Открыть: Ворота с калиткой"
-          >
-            <div class="portfolio-item__media placeholder" data-placeholder="Ворота с калиткой">
-              <img class="portfolio-item__img" src="" alt="Ворота с калиткой" loading="lazy" hidden>
-            </div>
-            <span class="portfolio-item__caption">Ворота с калиткой</span>
-          </button>
-
-          <button
-            class="portfolio-item reveal"
-            type="button"
-            data-category="private"
-            data-src="images/portfolio/stairs.jpg"
-            data-title="Лестницы и ограждения"
-            aria-label="Открыть: Лестницы и ограждения"
-          >
-            <div class="portfolio-item__media placeholder" data-placeholder="Лестницы и ограждения">
-              <img class="portfolio-item__img" src="" alt="Лестницы и ограждения" loading="lazy" hidden>
-            </div>
-            <span class="portfolio-item__caption">Лестницы и ограждения</span>
-          </button>
-
-          <button
-            class="portfolio-item reveal"
-            type="button"
-            data-category="private"
-            data-src="images/portfolio/canopy.jpg"
-            data-title="Крыльцо и навес"
-            aria-label="Открыть: Крыльцо и навес"
-          >
-            <div class="portfolio-item__media placeholder" data-placeholder="Крыльцо и навес">
-              <img class="portfolio-item__img" src="" alt="Крыльцо и навес" loading="lazy" hidden>
-            </div>
-            <span class="portfolio-item__caption">Крыльцо и навес</span>
-          </button>
-
-          <button
-            class="portfolio-item reveal"
-            type="button"
-            data-category="engineering"
-            data-src="images/portfolio/heating.jpg"
-            data-title="Монтаж системы отопления"
-            aria-label="Открыть: Монтаж системы отопления"
-          >
-            <div class="portfolio-item__media placeholder" data-placeholder="Монтаж системы отопления">
-              <img class="portfolio-item__img" src="" alt="Монтаж системы отопления" loading="lazy" hidden>
-            </div>
-            <span class="portfolio-item__caption">Монтаж системы отопления</span>
-          </button>
-
-          <button
-            class="portfolio-item reveal"
-            type="button"
-            data-category="engineering"
-            data-src="images/portfolio/engineering.jpg"
-            data-title="Монтаж инженерных систем"
-            aria-label="Открыть: Монтаж инженерных систем"
-          >
-            <div class="portfolio-item__media placeholder" data-placeholder="Монтаж инженерных систем">
-              <img class="portfolio-item__img" src="" alt="Монтаж инженерных систем" loading="lazy" hidden>
-            </div>
-            <span class="portfolio-item__caption">Монтаж инженерных систем</span>
-          </button>
+          </article>
         </div>
       </div>
     </section>
@@ -300,21 +239,22 @@
     <section class="section about" id="about">
       <div class="container about__grid">
         <div class="about__media reveal">
-          <!-- Фото мастера: images/master/photo.jpg -->
-          <div class="about__photo placeholder" data-placeholder="Фото мастера">
+          <div class="about__photo">
             <img
-              id="master-photo"
-              src=""
-              alt="Мастер по сварочным и монтажным работам"
+              src="images/master/master-sergey.png"
+              alt="Сергей Ашуров — сварочные и монтажные работы в Белорецке"
               loading="lazy"
-              hidden
+              width="900"
+              height="1200"
             >
           </div>
         </div>
         <div class="about__content reveal">
           <h2 class="section__title">Работа, за которую отвечаю</h2>
-          <p class="about__text">Выполняю сварочные и монтажные работы для частных заказчиков и организаций. Берусь как за небольшие бытовые задачи, так и за изготовление и монтаж крупных металлоконструкций.</p>
-          <p class="about__text">В работе важны точность, соблюдение технологии и надёжность готовой конструкции.</p>
+          <p class="about__name">Сергей Ашуров</p>
+          <p class="about__role">Сварочные и монтажные работы</p>
+          <p class="about__text">Выполняю сварочные и монтажные работы для частных заказчиков и организаций. Изготовление и монтаж металлоконструкций, ворота, навесы, лестницы и ограждения, а также монтаж, замена и ремонт систем отопления и водоснабжения.</p>
+          <p class="about__text">Работаю в Белорецке, возможен выезд по Республике Башкортостан.</p>
           <ul class="checklist">
             <li>Соблюдение геометрии и технологии сварки</li>
             <li>Профессиональное оборудование для автономной работы</li>
@@ -322,6 +262,14 @@
             <li>Гарантия на выполненные работы</li>
             <li>Выезд на объект</li>
           </ul>
+          <div class="about__actions">
+            <a
+              class="btn btn--primary"
+              href="https://vk.ru/serega907"
+              target="_blank"
+              rel="noopener noreferrer"
+            >Написать в VK</a>
+          </div>
         </div>
       </div>
     </section>
@@ -365,38 +313,32 @@
       </div>
     </section>
 
-    <!-- REQUEST CTA -->
+    <!-- CONTACT CTA -->
     <section class="section request" id="request">
       <div class="container request__wrap reveal">
         <div class="request__intro">
-          <h2 class="section__title section__title--light">Нужно рассчитать стоимость?</h2>
-          <p class="request__lead">Опишите задачу — предварительно обсудим работу и подскажем, что потребуется.</p>
+          <h2 class="section__title">Нужно рассчитать стоимость?</h2>
+          <p class="request__lead">Позвоните или напишите — обсудим задачу и подскажем, что потребуется.</p>
           <a class="request__phone" href="tel:+79874999277">+7 (987) 499-92-77</a>
         </div>
-        <form class="form" id="request-form" novalidate>
-          <div class="form__group">
-            <label class="form__label" for="name">Имя</label>
-            <input class="form__input" type="text" id="name" name="name" autocomplete="name" required placeholder="Как к вам обращаться">
-          </div>
-          <div class="form__group">
-            <label class="form__label" for="phone">Телефон</label>
-            <input class="form__input" type="tel" id="phone" name="phone" autocomplete="tel" required placeholder="+7 (___) ___-__-__" inputmode="tel">
-          </div>
-          <div class="form__group">
-            <label class="form__label" for="task">Описание задачи</label>
-            <textarea class="form__textarea" id="task" name="task" rows="4" required placeholder="Кратко опишите, что нужно сделать"></textarea>
-          </div>
-          <div class="form__check">
-            <input class="form__checkbox" type="checkbox" id="consent" name="consent" required>
-            <label class="form__check-label" for="consent">
-              Согласен на <a href="privacy.html">обработку персональных данных</a>
-            </label>
-          </div>
-          <button class="btn btn--primary btn--block" type="submit">Отправить заявку</button>
-          <p class="form__success" id="form-success" hidden role="status" tabindex="-1">
-            Спасибо! Заявка подготовлена. Для быстрого ответа свяжитесь с нами по телефону.
-          </p>
-        </form>
+        <div class="request__actions">
+          <a class="btn btn--primary btn--lg" href="tel:+79874999277">Позвонить</a>
+          <a
+            class="btn btn--primary btn--lg"
+            href="https://vk.ru/serega907"
+            target="_blank"
+            rel="noopener noreferrer"
+          >Написать Сергею в VK</a>
+          <a
+            class="request__community"
+            href="https://vk.ru/club240801557"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span class="request__community-title">Сообщество ВКонтакте</span>
+            <span class="request__community-text">Работы, новости и новые проекты</span>
+          </a>
+        </div>
       </div>
     </section>
 
@@ -410,9 +352,22 @@
           <a class="contacts__phone" href="tel:+79874999277">+7 (987) 499-92-77</a>
           <div class="contacts__actions">
             <a class="btn btn--primary" href="tel:+79874999277">Позвонить</a>
-            <!-- TODO: заменить href="#" на ссылку сообщества ВКонтакте -->
-            <a class="btn btn--ghost" href="#" id="vk-link" aria-label="Сообщество ВКонтакте (ссылка будет добавлена)">ВКонтакте</a>
+            <a
+              class="btn btn--primary"
+              href="https://vk.ru/serega907"
+              target="_blank"
+              rel="noopener noreferrer"
+            >Написать Сергею в VK</a>
           </div>
+          <a
+            class="contacts__community"
+            href="https://vk.ru/club240801557"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span class="contacts__community-title">Сообщество ВКонтакте</span>
+            <span class="contacts__community-text">Работы, новости и новые проекты</span>
+          </a>
         </div>
         <div class="contacts__aside reveal">
           <p class="contacts__note">Работаю с частными заказчиками и организациями. Выезд по Республике Башкортостан.</p>
@@ -428,24 +383,36 @@
         <a href="#services">Услуги</a>
         <a href="#works">Работы</a>
         <a href="#contacts">Контакты</a>
+        <a href="https://vk.ru/club240801557" target="_blank" rel="noopener noreferrer">Сообщество VK</a>
         <a href="privacy.html">Политика конфиденциальности</a>
       </nav>
     </div>
   </footer>
 
-  <!-- Lightbox -->
-  <div class="lightbox" id="lightbox" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-label="Просмотр работы">
+  <!-- Lightbox / галерея проекта -->
+  <div class="lightbox" id="lightbox" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-label="Галерея проекта">
     <div class="lightbox__backdrop" data-close></div>
     <div class="lightbox__panel">
       <button class="lightbox__close" type="button" data-close aria-label="Закрыть">
         <span aria-hidden="true">&times;</span>
       </button>
-      <figure class="lightbox__figure">
-        <div class="lightbox__media placeholder" id="lightbox-media" data-placeholder="">
-          <img class="lightbox__img" id="lightbox-img" src="" alt="" hidden>
-        </div>
-        <figcaption class="lightbox__caption" id="lightbox-caption"></figcaption>
-      </figure>
+      <div class="lightbox__toolbar">
+        <p class="lightbox__title" id="lightbox-caption"></p>
+        <p class="lightbox__counter" id="lightbox-counter" aria-live="polite"></p>
+      </div>
+      <div class="lightbox__stage">
+        <button class="lightbox__nav lightbox__nav--prev" type="button" id="lightbox-prev" aria-label="Предыдущее фото">
+          <span aria-hidden="true">‹</span>
+        </button>
+        <figure class="lightbox__figure">
+          <div class="lightbox__media" id="lightbox-media">
+            <img class="lightbox__img" id="lightbox-img" src="" alt="">
+          </div>
+        </figure>
+        <button class="lightbox__nav lightbox__nav--next" type="button" id="lightbox-next" aria-label="Следующее фото">
+          <span aria-hidden="true">›</span>
+        </button>
+      </div>
     </div>
   </div>
 
